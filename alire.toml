@@ -1,0 +1,24 @@
+name = "anuklear_examples"
+description = "Example programs for ANuklear."
+version = "0.1.0-dev"
+
+authors = ["Luke A. Guest"]
+maintainers = ["Luke A. Guest <laguest@archeia.com>"]
+maintainers-logins = ["Lucretia"]
+licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
+website = ""
+tags = ["ada", "nuklear", "ui", "gui", "anuklear"]
+
+executables = ["demo"]
+
+[[depends-on]]
+  anuklear = "*"
+
+[[pins]]
+  anuklear = { path = "../anuklear" }
+
+[[depends-on]]
+  sdlada = "^2.5.23"
+
+[[pins]]
+  sdlada = { path = "../../sdl/sdlada" }
