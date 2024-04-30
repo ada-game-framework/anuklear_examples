@@ -73,7 +73,7 @@ begin
 
          --  this hack makes the font appear to be scaled down to the desired
          --  size and is only necessary when font_scale > 1
-         Font.Handle.Height := Font.Handle.Height / Font_Scale;
+         Font.Handle.Height := @ / Font_Scale;
 
          Nk.style_set_font (Context, Font.Handle'Access);
 
