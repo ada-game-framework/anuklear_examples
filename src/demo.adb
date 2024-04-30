@@ -120,8 +120,8 @@ begin
                use type Nk.nk_flags;
             begin
                if Nk.start (Context, C.To_C ("Demo"), Nk.nk_rect_t'(50.0, 50.0, 230.0, 250.0),
-               Nk.nk_flags (Nk.Window_Border or Nk.Window_Movable or Nk.Window_Scalable or
-               Nk.Window_Minimizable or Nk.Window_Title))
+                 Nk.nk_flags (Nk.Window_Border or Nk.Window_Movable or Nk.Window_Scalable or
+                 Nk.Window_Minimizable or Nk.Window_Title))
                then
                   Nk.layout_row_static (Context, Height => 30.0, Item_Width => 80, Cols => 1);
 
@@ -136,10 +136,10 @@ begin
             end;
 
             Renderer.Set_Draw_Colour
-            (Palettes.Colour'(Red   => Palettes.Colour_Component (0.10 * 255),
-                              Green => Palettes.Colour_Component (0.18 * 255),
-                              Blue  => Palettes.Colour_Component (0.24 * 255),
-                              Alpha => Palettes.Colour_Component (1.0 * 255)));
+              (Palettes.Colour'(Red   => Palettes.Colour_Component (0.10 * 255),
+                                Green => Palettes.Colour_Component (0.18 * 255),
+                                Blue  => Palettes.Colour_Component (0.24 * 255),
+                                Alpha => Palettes.Colour_Component (1.0 * 255)));
             Renderer.Clear;
 
             NkR.sdl_render (Nk.ANTI_ALIASING_ON);
