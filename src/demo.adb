@@ -31,7 +31,7 @@ begin
       Video.Windows.Makers.Create
         (Window,
          "ANuklear: Demo",
-         Natural_Coordinates'(others => Video.Windows.Centered_Window_Position),
+         Video.Windows.Centered_Window_Position,
          Positive_Sizes'(1200, 800),
          Video.Windows.Shown or Video.Windows.Allow_High_DPI);
    end if;
