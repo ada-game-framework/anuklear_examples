@@ -148,7 +148,7 @@ begin
          end loop;
       end if;
 
-      nKr.sdl_shutdown;
+      NkR.sdl_shutdown;
       Renderer.Finalize;
       Window.Finalize;
       SDL.Quit;
