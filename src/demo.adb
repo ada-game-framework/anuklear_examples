@@ -63,8 +63,8 @@ begin
    begin
       NkR.sdl_font_stash_begin (Atlas'Access);
 
-      --  Font := Nk.font_atlas_add_default (Atlas.all'Access, 13.0 * Font_Scale, Config'Access);
-      Font := Nk.font_atlas_add_from_file (Atlas.all'Access, C.To_C ("./Nuklear/extra_font/DroidSans.ttf"), 14.0 * Font_Scale, Config'Access);
+      Font := Nk.font_atlas_add_default (Atlas.all'Access, 13.0 * Font_Scale, Config'Access);
+      --  Font := Nk.font_atlas_add_from_file (Atlas.all'Access, C.To_C ("./Nuklear/extra_font/DroidSans.ttf"), 14.0 * Font_Scale, Config'Access);
 
       if Font = null then
          IO.Put_Line ("Font didn't work!");
