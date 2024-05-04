@@ -14,11 +14,11 @@ executables = ["demo"]
 [[depends-on]]
   anuklear = "*"
 
-[[pins]]
-  anuklear = { path = "../anuklear" }
-
 [[depends-on]]
   sdlada = "^2.5.23"
 
 [[pins]]
-  sdlada = { path = "../../sdl/sdlada" }
+  anuklear = { url = "https://github.com/ada-game-framework/anuklear" }
+  sdlada = { url = "https://github.com/ada-game-framework/sdlada" }
+  # anuklear = { path = "../anuklear" }
+  # sdlada = { path = "../../sdl/sdlada" }
