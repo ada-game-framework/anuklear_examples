@@ -113,11 +113,6 @@ begin
                      when SDL.Events.Quit =>
                         Finished := True;
 
-                     --  when  SDL.Events.Keyboards.Key_Down =>
-                     --     if Event.Keyboard.Key_Sym.Key_Code = SDL.Events.Keyboards.Code_Escape then
-                     --        Finished := True;
-                     --     end if;
-
                      when others =>
                         null;
                   end case;
