@@ -9,7 +9,7 @@ Sample programs for ANuklear UI library.
 
 This is what I have for the ```demo``` program so far. You can move the window and min/maximise it, you can press the button which prints a message, but I don't know why it's not showing correctly.
 
-![Demo](https://i.imgur.com/4RZ5Zbf.png)
+![Demo](https://i.imgur.com/6B5HnPH.png)
 
 ## Copyright notice
 
