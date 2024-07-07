@@ -69,6 +69,15 @@ begin
          package Palettes renames SDL.Video.Palettes;
 
          use type System.Address;
+
+         type Difficulties is (Easy, Hard);
+
+         Difficulty : Difficulties := Easy;
+
+         type Compressions is new C.int range 0 .. 100 with
+            Convention => C;
+
+         Compression     : aliased C.int := 20;
       begin
          --  Nk.font_atlas_init_default (Atlas);
          NkR.sdl_font_stash_begin (Atlas);
@@ -96,26 +105,23 @@ begin
                use type SDL.Events.Keyboards.Key_Codes;
 
                Event : Events.Events;
+               Dummy : C.int;
             begin
                while Events.Poll (Event) loop
                   case Event.Common.Event_Type is
                      when SDL.Events.Quit =>
                         Finished := True;
 
-                     when  SDL.Events.Keyboards.Key_Down =>
-                        if Event.Keyboard.Key_Sym.Key_Code = SDL.Events.Keyboards.Code_Escape then
-                           Finished := True;
-                        end if;
+                     --  when  SDL.Events.Keyboards.Key_Down =>
+                     --     if Event.Keyboard.Key_Sym.Key_Code = SDL.Events.Keyboards.Code_Escape then
+                     --        Finished := True;
+                     --     end if;
 
                      when others =>
                         null;
                   end case;
 
-                  declare
-                     Dummy : C.int := NkR.sdl_handle_event (Event);
-                  begin
-                     null;
-                  end;
+                  Dummy := NkR.sdl_handle_event (Event);
                end loop;
             end;
 
@@ -124,6 +130,7 @@ begin
             --  Draw GUI.
             declare
                use type C.unsigned;
+               use type C.C_bool;
                use type Nk.nk_flags;
             begin
                if Nk.start (Context, C.To_C ("Demo"), Nk.nk_rect_t'(50.0, 50.0, 230.0, 250.0),
@@ -137,6 +144,27 @@ begin
                   end if;
 
                   Nk.layout_row_dynamic (Context, Height => 30.0, Cols => 2);
+
+                  if Nk.option_label (Context, C.To_C (Easy'Image), C.C_bool (Difficulty = Easy)) then
+                     Difficulty := Easy;
+                  end if;
+
+                  if Nk.option_label (Context, C.To_C (Hard'Image), C.C_bool (Difficulty = Hard)) then
+                     Difficulty := Hard;
+                  end if;
+
+                  Nk.layout_row_dynamic (Context, Height => 25.0, Cols => 1);
+
+                  Nk.property_int (
+                     Context,
+                     "Compression:",
+                     C.int (Compressions'First),
+                     Compression'Unrestricted_Access,
+                     C.int (Compressions'Last),
+                     10,
+                     1.0);
+
+                  Nk.layout_row_dynamic (Context, Height => 20.0, Cols => 1);
                end if;
 
                Nk.finish (Context);
