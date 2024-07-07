@@ -77,7 +77,8 @@ begin
          type Compressions is new C.int range 0 .. 100 with
             Convention => C;
 
-         Compression     : aliased C.int := 20;
+         Compression : aliased C.int := 20;
+         Background  : Nk.nk_colorf  := (0.10, 0.18, 0.24, 1.0);
       begin
          --  Nk.font_atlas_init_default (Atlas);
          NkR.sdl_font_stash_begin (Atlas);
@@ -165,16 +166,34 @@ begin
                      1.0);
 
                   Nk.layout_row_dynamic (Context, Height => 20.0, Cols => 1);
+
+                  Nk.label (Context, C.To_C ("background:"), Nk.nk_flags (Nk.TEXT_LEFT));
+                  Nk.layout_row_dynamic (Context, Height => 25.0, Cols => 1);
+
+                  if Nk.combo_begin_color (Context, Nk.rgb_cf (Background), Nk.vec2 (Nk.widget_width (Context), 400.0)) then
+                     Nk.layout_row_dynamic (Context, Height => 120.0, Cols => 1);
+
+                     Background := Nk.color_picker (Context, Background, Nk.RGBA);
+
+                     Nk.layout_row_dynamic (Context, Height => 25.0, Cols => 1);
+
+                     Background.r := Nk.propertyf (Context, C.To_C ("#R:"), 0.0, Background.r, 1.0, 0.01, 0.005);
+                     Background.g := Nk.propertyf (Context, C.To_C ("#G:"), 0.0, Background.g, 1.0, 0.01, 0.005);
+                     Background.b := Nk.propertyf (Context, C.To_C ("#B:"), 0.0, Background.b, 1.0, 0.01, 0.005);
+                     Background.a := Nk.propertyf (Context, C.To_C ("#A:"), 0.0, Background.a, 1.0, 0.01, 0.005);
+
+                     Nk.combo_end (Context);
+                  end if;
                end if;
 
                Nk.finish (Context);
             end;
 
             Renderer.Set_Draw_Colour
-               (Palettes.Colour'(Red   => Palettes.Colour_Component (0.10 * 255),
-                                 Green => Palettes.Colour_Component (0.18 * 255),
-                                 Blue  => Palettes.Colour_Component (0.24 * 255),
-                                 Alpha => Palettes.Colour_Component (1.0 * 255)));
+               (Palettes.Colour'(Red   => Palettes.Colour_Component (Background.r * 255.0),
+                                 Green => Palettes.Colour_Component (Background.g * 255.0),
+                                 Blue  => Palettes.Colour_Component (Background.b * 255.0),
+                                 Alpha => Palettes.Colour_Component (Background.a * 255.0)));
             Renderer.Clear;
 
             NkR.sdl_render (Nk.ANTI_ALIASING_ON);
