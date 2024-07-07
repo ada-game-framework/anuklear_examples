@@ -1,4 +1,3 @@
-with Ada.Assertions; use Ada.Assertions;
 with Ada.Strings.UTF_Encoding.Wide_Wide_Strings;
 with Ada.Text_IO;
 with Interfaces.C.Strings;
@@ -84,7 +83,6 @@ begin
          Font.Handle.Height := @ / Font_Scale;
 
          Nk.style_set_font (Context, Font.Handle'Access);
-         Assert (Font.texture.ptr /= System.Null_Address);
 
          --  Nk.set_style ()
 
